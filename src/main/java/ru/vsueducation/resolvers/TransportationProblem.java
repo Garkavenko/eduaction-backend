@@ -241,7 +241,7 @@ public class TransportationProblem implements GetJsonResult {
 
                 Shipment s = matrix[r][c];
                 if (s != null && s.r == r && s.c == c) {
-                    stringMatrix[r][c] = String.valueOf(s.quantity);
+                    stringMatrix[r][c] = String.valueOf((double) Math.round(s.quantity * 100) / 100);
                     totalCosts += (s.quantity * s.costPerUnit);
                 } else
                     stringMatrix[r][c] = "-";
