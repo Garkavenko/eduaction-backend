@@ -4,6 +4,7 @@ public class Task {
     private int id;
     private int type_id;
     private String name;
+    private String description;
     private String input_schema;
     private String url;
 
@@ -45,5 +46,13 @@ public class Task {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

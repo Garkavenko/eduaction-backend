@@ -1,5 +1,18 @@
 
 
 INSERT INTO task_types VALUES (DEFAULT, 'Типовые задачи');
-INSERT INTO tasks VALUES (DEFAULT, 1, 'Транспортная задача', '{"variables":["x","y","posts","shops","table"],"fields":[{"type":"Input","variable":"x","inputType":"numeric","name":"Количество поставщиков"},{"type":"Input","variable":"y","inputType":"numeric","name":"Количество магазинов"},{"type":"Array","variable":"posts","inputType":"numeric","name":"Запасы","length":"x"},{"type":"Array","variable":"shops","inputType":"numeric","name":"Потребности","length":"y"},{"type":"Table","variable":"table","inputType":"numeric","name":"Матрица тарифов","height":"x","width":"y"}]}', '/transportation_problem');
-INSERT INTO tasks VALUES (DEFAULT, 1, 'Задача о назначениях', '{"variables":["x","y","table"],"fields":[{"type":"Input","variable":"x","inputType":"numeric","name":"Количество столбцов"},{"type":"Input","variable":"y","inputType":"numeric","name":"Количество строк"},{"type":"Table","variable":"table","inputType":"numeric","name":"Матрица тарифов","height":"x","width":"y"}]}', '/transportation_problem');
+INSERT INTO tasks VALUES (
+    DEFAULT,
+    1,
+    'Транспортная задача', 'Транспортная задача (классическая) — задача об оптимальном плане перевозок однородного продукта из однородных пунктов наличия в однородные пункты потребления на однородных транспортных средствах (предопределённом количестве) со статичными данными и линеарном подходе (это основные условия задачи). Для классической транспортной задачи выделяют два типа задач: критерий стоимости (достижение минимума затрат на перевозку) или расстояний и критерий времени (затрачивается минимум времени на перевозку). Под названием транспортная задача, определяется широкий круг задач с единой математической моделью, эти задачи относятся к задачам линейного программирования и могут быть решены оптимальным методом. Однако, спец.метод решения транспортной задачи позволяет существенно упростить её решение, поскольку транспортная задача разрабатывалась для минимизации стоимости перевозок.',
+    '{"variables":["x","y","posts","shops","table"],"fields":[{"type":"Input","variable":"x","inputType":"numeric","name":"Количество поставщиков", "maxValue": 50},{"type":"Input","variable":"y","inputType":"numeric","name":"Количество магазинов", "maxValue": 50},{"type":"Array","variable":"posts","inputType":"numeric","name":"Запасы","length":"x"},{"type":"Array","variable":"shops","inputType":"numeric","name":"Потребности","length":"y"},{"type":"Table","variable":"table","inputType":"numeric","name":"Матрица тарифов","height":"x","width":"y"}]}',
+    '/transportation_problem'
+);
+INSERT INTO tasks VALUES (
+    DEFAULT,
+    1,
+    'Задача о назначениях',
+    'Задача о назначениях — одна из фундаментальных задач комбинаторной оптимизации в области математической оптимизации или исследовании операций. Задача состоит в поиске минимальной суммы дуг во взвешенном двудольном графе.',
+    '{"variables":["x","y","table","isMax"],"fields":[{"type":"Input","variable":"x","inputType":"numeric","name":"Количество столбцов", "maxValue": 50},{"type":"Input","variable":"y","inputType":"numeric","name":"Количество строк", "maxValue": 50},{"type": "CheckBox", "variable": "isMax", "name": "Рассчитать максимальную прибыль(по умолчанию рассчитывается минимальные расходы)"},{"type":"Table","variable":"table","inputType":"numeric","name":"Матрица тарифов","height":"y","width":"x"}]}',
+    '/assignment-problem'
+);

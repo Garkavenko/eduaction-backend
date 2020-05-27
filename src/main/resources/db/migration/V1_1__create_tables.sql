@@ -7,6 +7,7 @@ CREATE TABLE tasks (
   id SERIAL PRIMARY KEY,
   type_id INTEGER,
   name TEXT,
+  description TEXT,
   input_schema TEXT,
   url TEXT,
   FOREIGN KEY (type_id) REFERENCES task_types(id)

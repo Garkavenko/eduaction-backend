@@ -1,6 +1,5 @@
 package ru.vsueducation.resolvers;
 import com.google.gson.Gson;
-import com.sun.corba.se.spi.ior.ObjectKey;
 import ru.vsueducation.server.servlets.TransportationProblemServlet;
 import ru.vsueducation.utils.GetJsonResult;
 import ru.vsueducation.utils.ResponseObject;
@@ -34,7 +33,6 @@ public class TransportationProblem implements GetJsonResult {
         this.init(body);
         this.northWestCornerRule();
         this.steppingStone();
-        this.printResult("test");
     }
 
     public TransportationProblem() {}
@@ -251,43 +249,14 @@ public class TransportationProblem implements GetJsonResult {
         }
         final double totalCostsFinal = totalCosts;
         ResponseObject<String> responseObject = new ResponseObject<>();
-        responseObject.setText("Optimal solution");
+        responseObject.setText("Оптимальное решение");
         responseObject.setTable(stringMatrix);
         list.add(responseObject);
         responseObject = new ResponseObject<>();
-        responseObject.setText("Total costs: " + totalCostsFinal);
+        responseObject.setText("Затраты: " + totalCostsFinal);
         list.add(responseObject);
         final Gson gson = new Gson();
         final String test = gson.toJson(list);
         return test;
-    }
-
-    void printResult(String filename) {
-        System.out.printf("Optimal solution %s%n%n", filename);
-        double totalCosts = 0;
-
-        for (int r = 0; r < supply.length; r++) {
-            for (int c = 0; c < demand.length; c++) {
-
-                Shipment s = matrix[r][c];
-                if (s != null && s.r == r && s.c == c) {
-                    System.out.printf(" %3s ", (int) s.quantity);
-                    totalCosts += (s.quantity * s.costPerUnit);
-                } else
-                    System.out.printf("  -  ");
-            }
-            System.out.println();
-        }
-        System.out.printf("%nTotal costs: %s%n%n", totalCosts);
-    }
-
-    public static void main(String[] args) throws Exception {
-        final TransportationProblem t = new TransportationProblem();
-        for (String filename : new String[]{"input1.txt"}) {
-            t.init(filename);
-            t.northWestCornerRule();
-            t.steppingStone();
-            t.printResult(filename);
-        }
     }
 }

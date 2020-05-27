@@ -70,7 +70,7 @@
                     <driver>org.postgresql.Driver</driver>
                     <url>jdbc:postgresql://localhost:5432/education?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=UTF-8</url>
                     <user>postgres</user>
-                    <password>707128</password>
+                    <password>тщщкыщае</password>
                 </configuration>
             </plugin>
         </plugins>

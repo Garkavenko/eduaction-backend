@@ -1,5 +1,0 @@
-
-
-INSERT INTO task_types VALUES (DEFAULT, 'Типовые задачи');
-INSERT INTO tasks VALUES (DEFAULT, 1, 'Транспортная задача', '{"variables":["x","y","posts","shops","table"],"fields":[{"type":"Input","variable":"x","inputType":"numeric","name":"Количество поставщиков"},{"type":"Input","variable":"y","inputType":"numeric","name":"Количество магазинов"},{"type":"Array","variable":"posts","inputType":"numeric","name":"Запасы","length":"x"},{"type":"Array","variable":"shops","inputType":"numeric","name":"Потребности","length":"y"},{"type":"Table","variable":"table","inputType":"numeric","name":"Матрица тарифов","height":"x","width":"y"}]}', '/transportation_problem');
-INSERT INTO tasks VALUES (DEFAULT, 1, 'Задача о назначениях', '{"variables":["x","y","table"],"fields":[{"type":"Input","variable":"x","inputType":"numeric","name":"Количество столбцов"},{"type":"Input","variable":"y","inputType":"numeric","name":"Количество строк"},{"type":"Table","variable":"table","inputType":"numeric","name":"Матрица тарифов","height":"x","width":"y"}]}', '/transportation_problem');
