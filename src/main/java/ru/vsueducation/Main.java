@@ -1,10 +1,15 @@
 package ru.vsueducation;
 
-import ru.vsueducation.server.core.JettyServer;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import ru.vsueducation.server.core.Server;
 
 public class Main {
-    public static void main(final String[] args) throws Exception {
-        final JettyServer server = new JettyServer();
+    public static void main(final String[] args) {
+        BasicConfigurator.configure();
+        Logger.getRootLogger().setLevel(Level.INFO);
+        final Server server = new Server();
         server.start();
     }
 }

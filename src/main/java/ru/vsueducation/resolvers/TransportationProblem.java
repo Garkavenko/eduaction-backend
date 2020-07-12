@@ -1,6 +1,5 @@
 package ru.vsueducation.resolvers;
 import com.google.gson.Gson;
-import ru.vsueducation.server.servlets.TransportationProblemServlet;
 import ru.vsueducation.utils.GetJsonResult;
 import ru.vsueducation.utils.ResponseObject;
 
@@ -29,7 +28,7 @@ public class TransportationProblem implements GetJsonResult {
         }
     }
 
-    public TransportationProblem(final TransportationProblemServlet.Body body) {
+    public TransportationProblem(final ru.vsueducation.server.routes.TransportationProblem.Body body) {
         this.init(body);
         this.northWestCornerRule();
         this.steppingStone();
@@ -37,7 +36,7 @@ public class TransportationProblem implements GetJsonResult {
 
     public TransportationProblem() {}
 
-    void init(final TransportationProblemServlet.Body body) {
+    void init(final ru.vsueducation.server.routes.TransportationProblem.Body body) {
         int numSources = body.x;
         int numDestinations = body.y;
         List<Integer> src = body.posts;

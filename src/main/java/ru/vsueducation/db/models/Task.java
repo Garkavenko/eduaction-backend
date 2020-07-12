@@ -1,12 +1,19 @@
 package ru.vsueducation.db.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tasks")
 public class Task {
+    @Id
     private int id;
-    private int type_id;
     private String name;
     private String description;
     private String input_schema;
     private String url;
+    private int type_id;
+
+    public Task() {}
 
     public int getId() {
         return id;
@@ -14,14 +21,6 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getType_id() {
-        return type_id;
-    }
-
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
     }
 
     public String getName() {
