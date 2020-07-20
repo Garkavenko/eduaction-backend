@@ -16,4 +16,6 @@ public class NetworkError {
         final Gson gson = new Gson();
         return gson.toJson(new Error(message, code));
     }
+
+
 }

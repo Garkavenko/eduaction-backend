@@ -1,32 +1,30 @@
 package ru.vsueducation.server.routes;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import ru.vsueducation.db.dao.CourseWorkTemplateDao;
 import ru.vsueducation.server.context.Context;
 import ru.vsueducation.server.utils.ResponseUtils;
 import spark.Request;
 import spark.Response;
 
-public class CreateCourseWorkTemplate implements RouteWithContext {
+import java.util.List;
+
+public class RemoveTasksFromTemplate implements RouteWithContext {
 
     private static class Body {
-        int disciplineId;
-        int seasonId;
-        int profileId;
-        int year;
+        List<Integer> taskIds;
+        Integer templateId;
     }
+
+    private final Gson gson = new Gson();
+    private final CourseWorkTemplateDao courseWorkTemplateDao = new CourseWorkTemplateDao();
 
     @Override
     public Object handleWithContext(Request request, Response response, Context context) {
-        final Gson gson = new Gson();
         final Body body = gson.fromJson(request.body(), Body.class);
+        courseWorkTemplateDao.removeTasksFromTemplate(body.taskIds, body.templateId);
         ResponseUtils.setResponseJson(response);
-        return gson.toJson(new CourseWorkTemplateDao().createCourseWork(
-            body.disciplineId,
-            body.seasonId,
-            body.profileId,
-            body.year,
-            context.getUser().getId()
-        ));
+        return new JsonObject().toString();
     }
 }

@@ -14,6 +14,7 @@ public class Authorization implements Route {
     public Object handle(Request request, Response response) {
         final String login = request.queryParams("login");
         final String password = request.queryParams("password");
+        response.type("application/json");
         User user = null;
         try {
             user = new UsersDao().getUserByLogin(login);
@@ -23,7 +24,10 @@ public class Authorization implements Route {
             return NetworkError.toJson("Неправильный логин или пароль", 401);
         }
         response.status(200);
-        response.header("Set-Cookie", "AUTH_TOKEN=" + JWT.createJWT(user.getId()));
-        return new JsonObject().toString();
+        final String jwt = JWT.createJWT(user.getId());
+        response.header("Set-Cookie", "AUTH_TOKEN=" + jwt + "; Path=/");
+        final JsonObject json = new JsonObject();
+        json.addProperty("AUTH_TOKEN", jwt);
+        return json.toString();
     }
 }

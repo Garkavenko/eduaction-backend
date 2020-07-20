@@ -7,11 +7,19 @@ import ru.vsueducation.server.utils.ResponseUtils;
 import spark.Request;
 import spark.Response;
 
-public class GetAllCourseWorkTemplate extends RouteWithContext {
+public class GetAllCourseWorkTemplate implements RouteWithContext {
 
     @Override
-    Object handleWithContext(Request request, Response response, Context context) throws Exception {
+    public Object handleWithContext(Request request, Response response, Context context) {
         ResponseUtils.setResponseJson(response);
-        return new Gson().toJson(new CourseWorkTemplateDao().getAllCourseWorks());
+        Integer disciplineId = null;
+        Integer profileId = null;
+        Integer seasonId = null;
+        Integer year = null;
+        if (request.queryParams("disciplineId") != null) disciplineId = Integer.parseInt(request.queryParams("disciplineId"));
+        if (request.queryParams("profileId") != null) profileId = Integer.parseInt(request.queryParams("profileId"));
+        if (request.queryParams("seasonId") != null) seasonId = Integer.parseInt(request.queryParams("seasonId"));
+        if (request.queryParams("year") != null) year = Integer.parseInt(request.queryParams("year"));
+        return new Gson().toJson(new CourseWorkTemplateDao().getAllCourseWorks(disciplineId, profileId, seasonId, year));
     }
 }

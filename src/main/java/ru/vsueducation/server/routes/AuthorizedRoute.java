@@ -28,14 +28,19 @@ public class AuthorizedRoute implements Route {
         final String token = request.headers("AUTH_TOKEN");
         final String error = NetworkError.toJson("Пользователь не авторизован", 401);
         final User user;
-        if (token == null) return error;
+        if (token == null) {
+            response.status(401);
+            return error;
+        }
         try {
             final Integer userId = JWT.getUserIdByToken(token);
             user = new UsersDao().getUserById(userId);
             if (forRole != null && !user.getRole().getAlias().equals(forRole)) {
+                response.status(403);
                 return NetworkError.toJson("Ошибка прав доступа", 403);
             }
         } catch (Exception ignored) {
+            response.status(401);
             return error;
         }
         return route.handleWithContext(request, response, new Context(user));

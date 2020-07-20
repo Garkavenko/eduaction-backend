@@ -9,19 +9,25 @@ public class SessionProvider {
     public interface Callback<T> {
         T call(Session session);
     }
-    public static <T> T runSession(Callback<T> callback) {
+
+    public interface StatelessCallback<T> {
+        T call(Session session);
+    }
+
+    public static <T> T runSession(StatelessCallback<T> callback) {
         final Session sqlSession = HibernateConfig.getSessionFactory().openSession();
         final T result = callback.call(sqlSession);
         sqlSession.close();
         return result;
     }
 
-    public static void runTransaction(Callback<Void> callback) {
+    public static <T> T runTransaction(Callback<T> callback) {
         final Session sqlSession = HibernateConfig.getSessionFactory().openSession();
         final Transaction tx = sqlSession.beginTransaction();
-        callback.call(sqlSession);
+        final T result = callback.call(sqlSession);
         tx.commit();
         sqlSession.close();
+        return result;
     }
 
     public static <T> T getEntryById(final String entryName, final int id) {

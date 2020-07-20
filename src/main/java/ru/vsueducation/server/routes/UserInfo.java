@@ -7,9 +7,9 @@ import spark.Response;
 
 import static ru.vsueducation.server.utils.ResponseUtils.setResponseJson;
 
-public class UserInfo extends RouteWithContext {
+public class UserInfo implements RouteWithContext {
     @Override
-    Object handleWithContext(final Request request, final Response response, final Context context) {
+    public Object handleWithContext(final Request request, final Response response, final Context context) {
         setResponseJson(response);
         return new Gson().toJson(context.getUser());
     }
